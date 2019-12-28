@@ -26,5 +26,11 @@ namespace Vehicle_Management.Controllers
 
             return View();
         }
+
+        public ActionResult Demo()
+        {
+
+            return View();
+        }
     }
 }
