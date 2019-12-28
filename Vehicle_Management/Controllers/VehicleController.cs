@@ -13,5 +13,30 @@ namespace Vehicle_Management.Controllers
         {
             return View();
         }
+
+        public ActionResult Vehicle_List()
+        {
+
+
+            return View();
+
+        }
+
+        public ActionResult Add_New_Vehicle()
+
+        {
+
+
+            return View();
+
+
+
+
+        }
+
+         
+
+
+
     }
 }
