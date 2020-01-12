@@ -1,0 +1,342 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = null;
+  
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+
+
+
+    <!-- Summernote css -->
+    <link href="~/assets/libs/summernote/summernote-bs4.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+        <div class="container card-box">
+            <form id="demo-form" data-parsley-validate="">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="fullname">Vehicle Number * :</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" required="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="email">Purchase Year * :</label>
+                            <input type="text" class="form-control" name="PurchaseYear" id="Purchase_Year" required="" />
+                            @*<input type="email" id="email" class="form-control" name="email"
+                            data-parsley-trigger="change" required="">*@
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label>
+                                Vehicle Type *:
+                            </label>
+                            <label for="heard">Heard about us via *:</label>
+                            <select id="heard" class="form-control" required="">
+                                <option value="">Choose..</option>
+                                <option value="press">Press</option>
+                                <option value="net">Internet</option>
+                                <option value="mouth">Word of mouth</option>
+                                <option value="other">Other..</option>
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label for="MakeofVehicle">Make of Vehicle * :</label>
+                            <input type="text" class="form-control" name="MakeofVehicle" id="MakeofVehicle" required="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label for="Model">Color * :</label>
+                            <input type="text" class="form-control" name="Model" id="Model" required="" />
+
+                        </div>
+
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label for="Model">Current Mileage * :</label>
+                            <input type="text" class="form-control" name="CurrentMileage" id="CurrentMileage" required="" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <div class="form-group">
+                            <label>Vehicle Engine  * :</label>
+
+                            <div class="radio mb-1">
+                                <input type="radio" name="gender" id="genderM" value="Male" required="">
+                                <label for="genderM">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="gender" id="genderF" value="Female">
+                                <label for="genderF">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <label>Vehicle Engine  * :</label>
+
+                                <div id="summernote-editor">
+                                    <h6>This is an simple editable area.</h6>
+                                    <ul>
+                                        <li>
+                                            Select a text to reveal the toolbar.
+                                        </li>
+                                        <li>
+                                            Edit rich document on-the-fly, so elastic!
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        End of simple area
+                                    </p>
+                                </div> <!-- end summernote-editor-->
+                            </div> <!-- end card-body-->
+                        </div> <!-- end card-->
+                    </div><!-- end col -->
+                </div>
+            </form>
+        </div>
+
+        <div class="container card-box">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <label>File Upload</label>
+                            <FORM class="dropzone needsclick" id="demo-upload" action="/upload">
+                                <DIV>
+
+                                    <DIV class="dz-message needsclick">
+                                        Drop files here or click to upload.<BR>
+
+                                    </DIV>
+                                </DIV>
+
+                                <DIV id="preview-template" style="display: none;">
+                                    <DIV class="dz-preview dz-file-preview">
+                                        <DIV class="dz-image"><IMG data-dz-thumbnail=""></DIV>
+                                        <DIV class="dz-details">
+                                            <DIV class="dz-size"><SPAN data-dz-size=""></SPAN></DIV>
+                                            <DIV class="dz-filename"><SPAN data-dz-name=""></SPAN></DIV>
+                                        </DIV>
+                                        <DIV class="dz-progress">
+                                            <SPAN class="dz-upload"
+                                                  data-dz-uploadprogress=""></SPAN>
+                                        </DIV>
+                                        <DIV class="dz-error-message"><SPAN data-dz-errormessage=""></SPAN></DIV>
+                                        <div class="dz-success-mark">
+                                            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                <title>Check</title>
+                                                <desc>Created with Sketch.</desc>
+                                                <defs></defs>
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                    <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="dz-error-mark">
+                                            <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                                <title>error</title>
+                                                <desc>Created with Sketch.</desc>
+                                                <defs></defs>
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                                    <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                                                        <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </DIV>
+                                </DIV>
+
+                            </FORM>
+
+
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div><!-- end col -->
+            </div>
+
+        </div>
+
+        <form data-parsley-validate="">
+
+            <div class="row float-right">
+                <div class="button-list">
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Submit</button>
+                    <button type="button" class="btn btn-warning waves-effect waves-light">Clear</button>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+
+
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+
+    <!-- Vendor js -->
+    <script src="~/assets/js/vendor.min.js"></script>
+    <!-- App js-->
+    <script src="~/assets/js/app.min.js"></script>
+
+    <!-- Init js -->
+    <script src="~/assets/js/pages/form-summernote.init.js"></script>
+
+
+    <!-- Summernote js -->
+    <script src="~/assets/libs/summernote/summernote-bs4.min.js"></script>
+
+
+
+    <!-- Validation init js-->
+    <script src="~/assets/js/pages/form-validation.init.js"></script>
+
+    <script src="~/assets/libs/parsleyjs/parsley.min.js"></script>
+
+
+    <!-- DropZone jS-->
+
+    <script src="~/Scripts/dropzone/dropzone.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        var dropzone = new Dropzone('#demo-upload', {
+            previewTemplate: document.querySelector('#preview-template').innerHTML,
+
+            parallelUploads: 2,
+            thumbnailHeight: 120,
+            thumbnailWidth: 120,
+            addRemoveLinks: true,
+            maxFilesize: 3,
+            filesizeBase: 1000,
+            thumbnail: function (file, dataUrl) {
+                if (file.previewElement) {
+                    file.previewElement.classList.remove("dz-file-preview");
+                    var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                    for (var i = 0; i < images.length; i++) {
+                        var thumbnailElement = images[i];
+                        thumbnailElement.alt = file.name;
+                        thumbnailElement.src = dataUrl;
+                    }
+                    setTimeout(function () { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                }
+            }
+
+        });
+
+
+        // Now fake the file upload, since GitHub does not handle file uploads
+        // and returns a 404
+
+        var minSteps = 6,
+            maxSteps = 60,
+            timeBetweenSteps = 100,
+            bytesPerStep = 100000;
+
+        dropzone.uploadFiles = function (files) {
+            var self = this;
+
+            for (var i = 0; i < files.length; i++) {
+
+                var file = files[i];
+                totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+                for (var step = 0; step < totalSteps; step++) {
+                    var duration = timeBetweenSteps * (step + 1);
+                    setTimeout(function (file, totalSteps, step) {
+                        return function () {
+                            file.upload = {
+                                progress: 100 * (step + 1) / totalSteps,
+                                total: file.size,
+                                bytesSent: (step + 1) * file.size / totalSteps
+                            };
+
+                            self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                            if (file.upload.progress == 100) {
+                                file.status = Dropzone.SUCCESS;
+                                self.emit("success", file, 'success', null);
+                                self.emit("complete", file);
+                                self.processQueue();
+                                //document.getElementsByClassName("dz-success-mark").style.opacity = "1";
+                            }
+                        };
+                    }(file, totalSteps, step), duration);
+                }
+            }
+        }
+    </script>
+
+   
+</body>
+
+</html>

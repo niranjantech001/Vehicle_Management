@@ -86,11 +86,11 @@ body {
 }
 
 .content-page {
-    margin-left: 240px;
+    margin-left: 120px;
     overflow: hidden;
     padding: 0 15px 5px 15px;
     min-height: 80vh;
-    margin-top: 70px
+    margin-top: 40px;
 }
 
 .left-side-menu {

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,10 +46,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\net46\System.Runtime.Serialization.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,17 +137,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Dal\VehicleContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\Vehicle_Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\app.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\css\icons.min.css" />
+    <Content Include="assets\css\style.css" />
     <Content Include="assets\fonts\dripicons-v2.svg" />
     <Content Include="assets\fonts\dropify.svg" />
     <Content Include="assets\fonts\fa-brands-400.svg" />
@@ -205,6 +223,8 @@
     <Content Include="assets\images\users\user-8.jpg" />
     <Content Include="assets\images\users\user-9.jpg" />
     <Content Include="assets\js\app.min.js" />
+    <Content Include="assets\js\dropzone.min.js" />
+    <Content Include="assets\js\jquery-1.10.2.min.js" />
     <Content Include="assets\js\pages\add-product.init.js" />
     <Content Include="assets\js\pages\animation.init.js" />
     <Content Include="assets\js\pages\bootstrap-tables.init.js" />
@@ -259,6 +279,7 @@
     <Content Include="assets\js\pages\tour.init.js" />
     <Content Include="assets\js\pages\vector-maps.init.js" />
     <Content Include="assets\js\pages\widgets.init.js" />
+    <Content Include="assets\js\scripts.js" />
     <Content Include="assets\js\vendor.min.js" />
     <Content Include="assets\libs\animate\animate.min.css" />
     <Content Include="assets\libs\autocomplete\jquery.autocomplete.min.js" />
@@ -409,6 +430,30 @@
     <Content Include="assets\libs\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="assets\libs\x-editable\bootstrap-editable.css" />
     <Content Include="assets\libs\x-editable\bootstrap-editable.min.js" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput-rtl.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput-rtl.min.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
+    <Content Include="Content\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fas\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fas\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fas\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fas\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fas\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fas\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -418,8 +463,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="index.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\fonts\dripicons-v2.eot" />
     <Content Include="assets\fonts\dripicons-v2.ttf" />
     <Content Include="assets\fonts\dripicons-v2.woff" />
@@ -472,7 +515,33 @@
     <Content Include="assets\fonts\weathericons-regular-webfont.woff" />
     <Content Include="assets\fonts\weathericons-regular-webfont.woff2" />
     <Content Include="assets\fonts\weathericons-regular-webfontd41d.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-fileinput\scss\themes\explorer\theme.scss" />
+    <Content Include="Content\bootstrap-fileinput\scss\themes\explorer-fa\theme.scss" />
+    <Content Include="Content\bootstrap-fileinput\scss\themes\explorer-fas\theme.scss" />
+    <Content Include="Content\bootstrap-fileinput\scss\fileinput.scss" />
+    <Content Include="Content\bootstrap-fileinput\scss\fileinput-rtl.scss" />
+    <Content Include="assets\libs\summernote\popper.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
+    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -482,7 +551,55 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locales\ar.js" />
+    <Content Include="Scripts\locales\az.js" />
+    <Content Include="Scripts\locales\bg.js" />
+    <Content Include="Scripts\locales\ca.js" />
+    <Content Include="Scripts\locales\cr.js" />
+    <Content Include="Scripts\locales\cs.js" />
+    <Content Include="Scripts\locales\da.js" />
+    <Content Include="Scripts\locales\de.js" />
+    <Content Include="Scripts\locales\el.js" />
+    <Content Include="Scripts\locales\es.js" />
+    <Content Include="Scripts\locales\et.js" />
+    <Content Include="Scripts\locales\fa.js" />
+    <Content Include="Scripts\locales\fi.js" />
+    <Content Include="Scripts\locales\fr.js" />
+    <Content Include="Scripts\locales\gl.js" />
+    <Content Include="Scripts\locales\he.js" />
+    <Content Include="Scripts\locales\hu.js" />
+    <Content Include="Scripts\locales\id.js" />
+    <Content Include="Scripts\locales\it.js" />
+    <Content Include="Scripts\locales\ja.js" />
+    <Content Include="Scripts\locales\ka.js" />
+    <Content Include="Scripts\locales\kr.js" />
+    <Content Include="Scripts\locales\kz.js" />
+    <Content Include="Scripts\locales\LANG.js" />
+    <Content Include="Scripts\locales\lt.js" />
+    <Content Include="Scripts\locales\nl.js" />
+    <Content Include="Scripts\locales\no.js" />
+    <Content Include="Scripts\locales\pl.js" />
+    <Content Include="Scripts\locales\pt-BR.js" />
+    <Content Include="Scripts\locales\pt.js" />
+    <Content Include="Scripts\locales\ro.js" />
+    <Content Include="Scripts\locales\ru.js" />
+    <Content Include="Scripts\locales\sk.js" />
+    <Content Include="Scripts\locales\sl.js" />
+    <Content Include="Scripts\locales\sv.js" />
+    <Content Include="Scripts\locales\th.js" />
+    <Content Include="Scripts\locales\tr.js" />
+    <Content Include="Scripts\locales\uk.js" />
+    <Content Include="Scripts\locales\uz.js" />
+    <Content Include="Scripts\locales\vi.js" />
+    <Content Include="Scripts\locales\zh-TW.js" />
+    <Content Include="Scripts\locales\zh.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\plugins\piexif.js" />
+    <Content Include="Scripts\plugins\piexif.min.js" />
+    <Content Include="Scripts\plugins\purify.js" />
+    <Content Include="Scripts\plugins\purify.min.js" />
+    <Content Include="Scripts\plugins\sortable.js" />
+    <Content Include="Scripts\plugins\sortable.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -500,20 +617,21 @@
     <Content Include="Views\Home\Demo.cshtml" />
     <Content Include="Views\Vehicle\Vehicle_List.cshtml" />
     <Content Include="Views\Vehicle\Add_New_Vehicle.cshtml" />
+    <Content Include="Views\Vehicle\Test.cshtml" />
+    <Content Include="Views\Vehicle\Test1.cshtml" />
+    <Content Include="Views\Vehicle\Test2.cshtml" />
+    <Content Include="Views\Vehicle\Test3.cshtml" />
+    <Content Include="Views\Vehicle\Test4.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Vehicle\Test5.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
@@ -551,7 +669,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

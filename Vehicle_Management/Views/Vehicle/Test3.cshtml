@@ -1,0 +1,199 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <link href="~/Content/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" />
+
+    @*<link href="~/Content/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="~/Content/bootstrap-fileinput/themes/explorer-fas/theme.css" rel="stylesheet" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script src="~/Scripts/plugins/piexif.js"></script>
+    @*<script src="~/Scripts/plugins/piexif.min.js"></script>*@
+    @*<script src="~/Scripts/plugins/sortable.min.js"></script>*@
+    <script src="~/Scripts/plugins/sortable.js"></script>
+    @*<script src="~/Scripts/fileinput.min.js"></script>*@
+    <script src="~/Scripts/fileinput.js"></script>
+    <script src="~/Content/bootstrap-fileinput/themes/explorer/theme.js"></script>
+    <script src="~/Content/bootstrap-fileinput/themes/fas/theme.js"></script>
+    <script src="~/Scripts/locales/fr.js"></script>
+    <script src="~/Scripts/locales/es.js"></script>
+    <title>Test3</title>
+
+    <script>
+        $('#file-fr').fileinput({
+            theme: 'fas',
+            language: 'fr',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif']
+        });
+        $('#file-es').fileinput({
+            theme: 'fas',
+            language: 'es',
+            uploadUrl: '#',
+            allowedFileExtensions: ['jpg', 'png', 'gif']
+        });
+        $("#file-0").fileinput({
+            theme: 'fas',
+            uploadUrl: '#'
+        }).on('filepreupload', function (event, data, previewId, index) {
+            alert('The description entered is:\n\n' + ($('#description').val() || ' NULL'));
+        });
+        $("#file-1").fileinput({
+            theme: 'fas',
+            uploadUrl: '#', // you must set a valid URL here else you will get an error
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize: 1000,
+            maxFilesNum: 10,
+            //allowedFileTypes: ['image', 'video', 'flash'],
+            slugCallback: function (filename) {
+                return filename.replace('(', '_').replace(']', '_');
+            }
+        });
+        /*
+         $(".file").on('fileselect', function(event, n, l) {
+         alert('File Selected. Name: ' + l + ', Num: ' + n);
+         });
+         */
+        $("#file-3").fileinput({
+            theme: 'fas',
+            showUpload: false,
+            showCaption: false,
+            browseClass: "btn btn-primary btn-lg",
+            fileType: "any",
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                "http://lorempixel.com/1920/1080/transport/1",
+                "http://lorempixel.com/1920/1080/transport/2",
+                "http://lorempixel.com/1920/1080/transport/3"
+            ],
+            initialPreviewConfig: [
+                { caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                { caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                { caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+            ]
+        });
+        $("#file-4").fileinput({
+            theme: 'fas',
+            uploadExtraData: { kvId: '10' }
+        });
+        $(".btn-warning").on('click', function () {
+            var $el = $("#file-4");
+            if ($el.attr('disabled')) {
+                $el.fileinput('enable');
+            } else {
+                $el.fileinput('disable');
+            }
+        });
+        $(".btn-info").on('click', function () {
+            $("#file-4").fileinput('refresh', { previewClass: 'bg-info' });
+        });
+        /*
+         $('#file-4').on('fileselectnone', function() {
+         alert('Huh! You selected no files.');
+         });
+         $('#file-4').on('filebrowse', function() {
+         alert('File browse clicked for #file-4');
+         });
+         */
+        $(document).ready(function () {
+            $("#test-upload").fileinput({
+                'theme': 'fas',
+                'showPreview': false,
+                'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                'elErrorContainer': '#errorBlock'
+            });
+            $("#kv-explorer").fileinput({
+                'theme': 'explorer-fas',
+                'uploadUrl': '#',
+                overwriteInitial: false,
+                initialPreviewAsData: true,
+                initialPreview: [
+                    "http://lorempixel.com/1920/1080/nature/1",
+                    "http://lorempixel.com/1920/1080/nature/2",
+                    "http://lorempixel.com/1920/1080/nature/3"
+                ],
+                initialPreviewConfig: [
+                    { caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1 },
+                    { caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2 },
+                    { caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3 }
+                ]
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <form enctype="multipart/form-data">
+        @*<div class="file-loading">
+                <input id="file-0c" class="file" type="file" multiple data-min-file-count="3" data-theme="fas">
+            </div>
+        
+        <div class="form-group">
+                <div class="file-loading">
+                    <input id="file-0d" class="file" type="file" data-theme="fas">
+                </div>
+            </div>
+    
+        <div class="form-group">
+                <div class="file-loading">
+                    <input id="file-1" type="file" multiple class="file" data-overwrite-initial="false" data-min-file-count="2" data-theme="fas">
+                </div>
+            </div>
+            <hr>
+        <div class="form-group">
+                <div class="file-loading">
+                    <input id="file-2" type="file" class="file" readonly data-show-upload="false" data-theme="fas">
+                </div>
+            </div>
+            <hr>
+        <div class="form-group">
+                <div class="file-loading">
+                    <label>Preview File Icon</label>
+                    <input id="file-3" type="file" multiple>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="file-loading">
+                    <input id="file-4" type="file" class="file" data-upload-url="#" data-theme="fas">
+                </div>
+            </div>
+            <hr>
+        <div class="form-group">
+                <button class="btn btn-warning" type="button">Disable Test</button>
+                <button class="btn btn-info" type="reset">Refresh Test</button>
+                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-outline-secondary" type="reset">Reset</button>
+            </div>
+            <hr>*@
+            @*<div class="form-group">
+                <div class="file-loading">
+                    <input type="file" class="file" id="test-upload" multiple data-theme="fas">
+                </div>
+                <div id="errorBlock" class="help-block"></div>
+            </div>*@
+            <hr>
+        <div class="form-group">
+            <div class="file-loading">
+                <input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+            </div>
+        </div>
+    </form>
+  
+</body>
+</html>
