@@ -291,8 +291,16 @@
     <Content Include="assets\libs\bootstrap-maxlength\bootstrap-maxlength.min.js" />
     <Content Include="assets\libs\bootstrap-select\bootstrap-select.min.css" />
     <Content Include="assets\libs\bootstrap-select\bootstrap-select.min.js" />
+    <Content Include="assets\libs\bootstrap-table\bootstrap-table-export.js" />
+    <Content Include="assets\libs\bootstrap-table\bootstrap-table-filter-control.js" />
+    <Content Include="assets\libs\bootstrap-table\bootstrap-table-toolbar.js" />
     <Content Include="assets\libs\bootstrap-table\bootstrap-table.min.css" />
     <Content Include="assets\libs\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="assets\libs\bootstrap-table\bootstrap.min.css" />
+    <Content Include="assets\libs\bootstrap-table\bootstrap.min.js" />
+    <Content Include="assets\libs\bootstrap-table\jquery-latest.min.js" />
+    <Content Include="assets\libs\bootstrap-table\tableExport.js" />
+    <Content Include="assets\libs\bootstrap-table\tableExport.min.js" />
     <Content Include="assets\libs\bootstrap-touchspin\jquery.bootstrap-touchspin.css" />
     <Content Include="assets\libs\bootstrap-touchspin\jquery.bootstrap-touchspin.min.js" />
     <Content Include="assets\libs\c3\c3.min.css" />
@@ -547,6 +555,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -626,6 +635,7 @@
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Vehicle\Test5.cshtml" />
+    <Content Include="Views\Vehicle\Test6.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

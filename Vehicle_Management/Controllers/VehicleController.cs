@@ -152,6 +152,12 @@ namespace Vehicle_Management.Controllers
             }
 
         }
+
+        public ActionResult Test6()
+        {
+
+            return View();
+        }
          
 
 

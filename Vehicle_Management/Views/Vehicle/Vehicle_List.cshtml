@@ -4,5 +4,310 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Vehicle_List</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/assets/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
 
+
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/assets/libs/bootstrap-table/bootstrap-table-toolbar.js"></script>
+    <script src="~/assets/libs/bootstrap-table/tableExport.js"></script>
+    <script type="text/javaScript">
+
+        function detailFormatter(index, row) {
+            var html = [];
+            $.each(row, function (key, value) {
+                html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+            });
+            return html.join('');
+        }
+
+        function DoOnCellHtmlData(cell, row, col, data) {
+            var result = "";
+            if (typeof data != 'undefined' && data != "") {
+                var html = $.parseHTML(data);
+
+                $.each(html, function () {
+                    if (typeof $(this).html() === 'undefined')
+                        result += $(this).text();
+                    else if (typeof $(this).attr('class') === 'undefined' || $(this).hasClass('th-inner') === true)
+                        result += $(this).html();
+                });
+            }
+            return result;
+        }
+
+        $(function () {
+            $('#toolbar').find('select').change(function () {
+                $('#table').bootstrapTable('refreshOptions', {
+                    exportDataType: $(this).val()
+                });
+            });
+        })
+
+        $(document).ready(function () {
+            $('#table').bootstrapTable('refreshOptions', {
+                exportOptions: {
+                    ignoreColumn: [0, 1], // or as string array: ['0','checkbox']
+                    onCellHtmlData: DoOnCellHtmlData
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+    <div class="wrapper">
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                   
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-box">
+                                <h4 class="header-title">Custom Toolbar</h4>
+                                <p class="sub-header">
+                                    Example of custom toolbar.
+                                </p>
+
+                                <button id="demo-delete-row" class="btn btn-danger btn-sm" disabled><i class="mdi mdi-close mr-1"></i>Delete</button>
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="demo-custom-toolbar" data-toggle="table"
+                                       data-toolbar="#demo-delete-row"
+                                       data-search="true"
+                                       data-show-export="true"
+                                       
+                                       data-show-refresh="true"
+                                       data-show-columns="true"
+                                       data-sort-name="id"
+                                       data-page-list="[5, 10, 20]"
+                                       data-page-size="5"
+                                       data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="id" data-sortable="true" data-formatter="invoiceFormatter">Order ID</th>
+                                            <th data-field="name" data-sortable="true">Name</th>
+                                            <th data-field="date" data-sortable="true" data-formatter="dateFormatter">Order Date</th>
+                                            <th data-field="amount" data-align="center" data-sortable="true" data-sorter="priceSorter">Price</th>
+                                            <th data-field="status" data-align="center" data-sortable="true" data-formatter="statusFormatter">Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1609</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Unpaid</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1610</td>
+                                            <td>Woldt</td>
+                                            <td>24 Jun 2017</td>
+                                            <td>$ 15.00</td>
+                                            <td>Paid</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1611</td>
+                                            <td>Leonardo</td>
+                                            <td>25 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Shipped</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1612</td>
+                                            <td>Halladay</td>
+                                            <td>27 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Refunded</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1613</td>
+                                            <td>Badgett</td>
+                                            <td>28 Jun 2017</td>
+                                            <td>$ 95.00</td>
+                                            <td>Unpaid</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1614</td>
+                                            <td>Boudreaux</td>
+                                            <td>29 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Paid</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1615</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Shipped</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1616</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Refunded</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1617</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Unpaid</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1618</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Paid</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1619</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Shipped</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1620</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Refunded</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1621</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Unpaid</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1622</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Paid</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1623</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Shipped</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td>UB-1624</td>
+                                            <td>Boudreaux</td>
+                                            <td>22 Jun 2017</td>
+                                            <td>$ 35.00</td>
+                                            <td>Refunded</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div> <!-- end card-box-->
+                        </div> <!-- end col-->
+                    </div>
+
+                    <div class="row">
+                        <table id="table"
+                               data-toggle="table"
+                               data-height="600"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-show-export="true"
+                               data-click-to-select="true"
+                               data-toolbar="#toolbar"
+                               data-pagination="true"
+                               data-search="true"
+                               data-detail-view="true"
+                               data-detail-formatter="detailFormatter"
+                               data-filter-control="true"
+                               data-url="tableExport.json">
+                            <thead>
+                                <tr>
+                                    <th data-field="checkbox" data-checkbox="true">           </th>
+                                    <th data-field="Rank" data-sortable="true" data-filter-control="select" data-visible="true">Rank       </th>
+                                    <th data-field="Flag" data-sortable="true" data-filter-control="input" data-visible="false">Flag       </th>
+                                    <th data-field="Country" data-sortable="true" data-filter-control="select" data-visible="true">Country    </th>
+                                    <th data-field="Population" data-sortable="true" data-filter-control="select" data-visible="false">Population </th>
+                                    <th data-field="Date" data-sortable="true" data-filter-control="select" data-visible="true">Date       </th>
+                                    <th data-field="p_of_world" data-sortable="true" data-filter-control="select" data-visible="false">% of world </th>
+                                    <th data-field="Language" data-sortable="true" data-filter-control="select" data-visible="true">Language   </th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                    <!-- end row-->
+                </div> <!-- container -->
+            </div>
+        </div>
+        </div>
+        <!-- content -->
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- Vendor js -->
+        <script src="~/assets/js/vendor.min.js"></script>
+        <!-- App js-->
+        <script src="~/assets/js/app.min.js"></script>
+
+        <!-- Bootstrap Tables js -->
+        <script src="~/assets/libs/bootstrap-table/bootstrap-table.min.js"></script>
+
+        <!-- Init js -->
+        <script src="~/assets/js/pages/bootstrap-tables.init.js"></script>
+        
+</body>
+</html>

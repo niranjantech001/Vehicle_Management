@@ -23,7 +23,7 @@ namespace Vehicle_Management.Models
         public string Colour { get; set; }
 
         public string Current_Mileage { get; set; }
-        public int Vehicle_Engine { get; set; }
+        public string Vehicle_Engine { get; set; }
 
         public string Description { get; set; }
     }
