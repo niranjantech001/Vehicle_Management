@@ -21,10 +21,57 @@ namespace Vehicle_Management.Controllers
         public ActionResult Vehicle_List()
         {
 
+            List<VehicleDetails> vehicleDetails_list = new List<VehicleDetails>();
 
-            return View();
+            using (var context = new VehicleContext())
+            {
+                vehicleDetails_list = context.vehicles.ToList();
+
+                //  var Query = (from result in context.Vehicle_List
+                //             select new VehicleDetails
+                //             {
+
+
+                //                 Vehicle_Number = result.Vehicle_Number
+                //             });
+                //vehicleDetails_list = Query.ToList();
+
+                return View("Vehicle_List", vehicleDetails_list);
+
+            }
+          
+
+
+            //    List<VehicleDetails> vehicleDetails_list = new List<VehicleDetails>();
+            //using (var ObjContext = new VehicleContext())
+            //{
+            //    var List = (from v in objVehicleContext.vehicles
+            //                select new VehicleDetails
+            //                {
+
+            //                    Vehicle_Number=v.Vehicle_Number,
+            //                    Vehicle_Engine=v.Vehicle_Engine,
+            //                    Vehicle_Type=v.Vehicle_Type,
+            //                    Colour=v.Colour,
+            //                    Make_of_Vehicle=v.Make_of_Vehicle,
+            //                    Purchase_Year=v.Purchase_Year
+
+
+            //                });
+
+            //    vehicleDetails_list = List.ToList();
+
+            //}
+
+            //return View("Vehicle_List", vehicleDetails_list);
 
         }
+
+        //public JsonResult Vehicle_List_Details()
+        //{
+
+        //  //  return Json(vehicleDetails_list, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult Add_New_Vehicle()
 
@@ -136,7 +183,7 @@ namespace Vehicle_Management.Controllers
         }
 
 
-        public ActionResult Get_Vhicle_Types()
+        public JsonResult Get_Vhicle_Types()
         {
             List<Vehicle_Types> vehicle_Types_List = new List<Vehicle_Types>();
 
@@ -158,9 +205,42 @@ namespace Vehicle_Management.Controllers
 
             return View();
         }
-         
 
 
+        public ActionResult Vehicle_Assign()
+        {
+
+
+            List<VehicleDetails> vehicleDetails_list = new List<VehicleDetails>();
+
+            using (var context = new VehicleContext())
+            {
+                vehicleDetails_list = context.vehicles.ToList();
+
+                //  var Query = (from result in context.Vehicle_List
+                //             select new VehicleDetails
+                //             {
+
+
+                //                 Vehicle_Number = result.Vehicle_Number
+                //             });
+                //vehicleDetails_list = Query.ToList();
+
+                return View("Vehicle_Assign", vehicleDetails_list);
+
+            }
+
+
+            
+            
+
+        }
+
+        public ActionResult Test7()
+        {
+
+            return View();
+        }
 
     }
 }

@@ -1,25 +1,29 @@
 ﻿@model IEnumerable<Vehicle_Management.Models.VehicleDetails>
 
 @{
-    ViewBag.Title = "Vehicle_List";
+    ViewBag.Title = "Vehicle_Assign";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link href="~/assets/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
-
-
     <!-- App css -->
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
-
+    @*<link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />*@
 
     <script src="~/assets/libs/bootstrap-table/bootstrap-table-toolbar.js"></script>
     <script src="~/assets/libs/bootstrap-table/tableExport.js"></script>
+
+    <!--Slect Jquery-->
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+
+    <script src="~/assets/libs/select2/jquery.min.js"></script>
+    <link href="~/assets/libs/select2/select22.min.css" rel="stylesheet" />
+    <script src="~/assets/libs/select2/select22.min.js"></script>
+
     <script type="text/javaScript">
 
         function detailFormatter(index, row) {
@@ -63,29 +67,81 @@
         });
 
     </script>
+
 </head>
 <body>
-
 
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
-    <div class="wrapper">
-        <div class="content-page">
-            <div class="content">
 
-                <!-- Start Content-->
-                <div class="container-fluid">
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                           
+                            <h4 class="page-title">Assign Vehicle</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
 
 
-                    <div class="row">
-                        <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form class="form-inline">
+                                        <div class="form-group mx-sm-3">
+                                            <label for="status-select" class="mr-2">Vehicle Number</label>
+                                            <select id="Vehicle_Number" name="Vehicle_Number" style="width:200px;" class="form-control select2" required="">
+                                                <option value="Choose..">Choose..</option>
+                                                <option value="press">Press</option>
+                                                <option value="net">Internet</option>
+                                                <option value="mouth">Word of mouth</option>
+                                                <option value="other">Other..</option>
+                                            </select>
+                                            <script>$('.select2').select2();</script>
+                                        </div>
+                                        <div class="form-group mx-sm-3">
+                                            <label for="status-select" class="mr-2">Assigned To</label>
+                                            <select id="Employee_Name" name="Employee_Name" class="form-control select2" required="" style="width:200px;">
+                                                <option value="Choose..">Choose..</option>
+                                                <option value="press">Press</option>
+                                                <option value="net">Internet</option>
+                                                <option value="mouth">Word of mouth</option>
+                                                <option value="other">Other..</option>
+                                            </select>
+                                            <script>$('.select2').select2();</script>
+                                        </div>
+
+                                        <div class="form-group-mx-sm-3">
+
+
+                                            <button type="button" class="btn btn-success waves-effect waves-light mr-1"> Assign</button>
+                                            <button type="button" class="btn btn-warning waves-effect waves-light mr-1"> Clear</button>
+                                        </div>
+                                    </form>
+                                </div>
+                               <!-- end col-->
+                            </div> <!-- end row -->
+                        </div> <!-- end card-box -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-12">
+                       
                             <div class="card-box">
-                                <h4 class="header-title">Vhicles List</h4>
-
-
-
-
+                                <h4 class="header-title">Assigned Vhicles List</h4>
                                 <table id="demo-custom-toolbar" data-toggle="table"
                                        data-toolbar="#demo-delete-row"
                                        data-search="true"
@@ -143,17 +199,39 @@
                                         </tbody>
                                     }
                                 </table>
-                            </div> <!-- end card-box-->
-                        </div> <!-- end col-->
+                            </div> 
+                       
+                        </div>
                     </div>
 
 
-                    <!-- end row-->
                 </div> <!-- container -->
+
+        </div> <!-- content -->
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        2015 - 2019 &copy; UBold theme by <a href="#">Coderthemes</a>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="javascript:void(0);">About Us</a>
+                            <a href="javascript:void(0);">Help</a>
+                            <a href="javascript:void(0);">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </footer>
+        <!-- end Footer -->
+
     </div>
-    <!-- content -->
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
@@ -170,7 +248,6 @@
 
 
     <!-- Tippy js-->
-   
-    <script src="~/assets/libs/tippy-js/tippy.all.min.js"></script>
+
 </body>
 </html>

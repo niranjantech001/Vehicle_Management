@@ -421,8 +421,12 @@
     <Content Include="assets\libs\rickshaw\rickshaw.min.js" />
     <Content Include="assets\libs\rwd-table\rwd-table.min.css" />
     <Content Include="assets\libs\rwd-table\rwd-table.min.js" />
+    <Content Include="assets\libs\select2\bootstrap.min.js" />
+    <Content Include="assets\libs\select2\jquery.min.js" />
     <Content Include="assets\libs\select2\select2.min.css" />
     <Content Include="assets\libs\select2\select2.min.js" />
+    <Content Include="assets\libs\select2\select22.min.css" />
+    <Content Include="assets\libs\select2\select22.min.js" />
     <Content Include="assets\libs\summernote\font\summernotec360-2.html" />
     <Content Include="assets\libs\summernote\font\summernotec360-3.html" />
     <Content Include="assets\libs\summernote\font\summernotec360.html" />
@@ -636,9 +640,12 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Vehicle\Test5.cshtml" />
     <Content Include="Views\Vehicle\Test6.cshtml" />
+    <Content Include="Views\Vehicle\Vehicle_Assign.cshtml" />
+    <Content Include="Views\Vehicle\Test7.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Database\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
