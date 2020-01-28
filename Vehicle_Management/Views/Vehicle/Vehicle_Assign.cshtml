@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Vehicle_Management.Models.VehicleDetails>
-
+﻿@model IEnumerable<Vehicle_Management.Models.Vehicle_Assign_Detaials>
 @{
     ViewBag.Title = "Vehicle_Assign";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var User_Id = TempData["User_Id"];
+    var Date = TempData["Date"];
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +14,13 @@
     <!-- App css -->
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    @*<link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />*@
-
+    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
     <script src="~/assets/libs/bootstrap-table/bootstrap-table-toolbar.js"></script>
     <script src="~/assets/libs/bootstrap-table/tableExport.js"></script>
 
     <!--Slect Jquery-->
-    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
     <script src="~/assets/libs/select2/jquery.min.js"></script>
     <link href="~/assets/libs/select2/select22.min.css" rel="stylesheet" />
@@ -68,6 +70,84 @@
 
     </script>
 
+
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            var ddl_Vehicles = $("#ddl_Vehicle_Number");
+
+            ddl_Vehicles.empty().append('<option selected="Select" Value="0" disabled="disabled">Loading...</option>');
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Vehicle/Get_Vehicle_Number",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    ddl_Vehicles.empty().append('<option selected="Select" Value="0" disabled="disabled">Select</option>');
+
+                    $.each(response, function () {
+                        ddl_Vehicles.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+
+                },
+                failure: function (response) {
+
+                    alert(response.responseText);
+
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            var ddlEmployee_Name = $("#ddlEmployee_Name");
+
+            ddlEmployee_Name.empty().append('<option selected="Select" Value="0" disabled="disabled">Loading...</option>');
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Vehicle/Get_Employee_Name",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    ddlEmployee_Name.empty().append('<option selected="Select" Value="0" disabled="disabled">Select</option>');
+
+                    $.each(response, function () {
+                        ddlEmployee_Name.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+
+                },
+                failure: function (response) {
+
+                    alert(response.responseText);
+
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+    </script>
+
 </head>
 <body>
 
@@ -85,12 +165,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box">
-                           
+
                             <h4 class="page-title">Assign Vehicle</h4>
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
+
 
 
                 <div class="row">
@@ -101,36 +182,24 @@
                                     <form class="form-inline">
                                         <div class="form-group mx-sm-3">
                                             <label for="status-select" class="mr-2">Vehicle Number</label>
-                                            <select id="Vehicle_Number" name="Vehicle_Number" style="width:200px;" class="form-control select2" required="">
-                                                <option value="Choose..">Choose..</option>
-                                                <option value="press">Press</option>
-                                                <option value="net">Internet</option>
-                                                <option value="mouth">Word of mouth</option>
-                                                <option value="other">Other..</option>
-                                            </select>
+                                            <select id="ddl_Vehicle_Number" name="ddl_Vehicle_Number" style="width:200px;" class="form-control select2" required=""></select>
                                             <script>$('.select2').select2();</script>
                                         </div>
                                         <div class="form-group mx-sm-3">
                                             <label for="status-select" class="mr-2">Assigned To</label>
-                                            <select id="Employee_Name" name="Employee_Name" class="form-control select2" required="" style="width:200px;">
-                                                <option value="Choose..">Choose..</option>
-                                                <option value="press">Press</option>
-                                                <option value="net">Internet</option>
-                                                <option value="mouth">Word of mouth</option>
-                                                <option value="other">Other..</option>
-                                            </select>
+                                            <select id="ddlEmployee_Name" name="ddlEmployee_Name" class="form-control select2" required="" style="width:200px;"></select>
                                             <script>$('.select2').select2();</script>
                                         </div>
 
                                         <div class="form-group-mx-sm-3">
 
 
-                                            <button type="button" class="btn btn-success waves-effect waves-light mr-1"> Assign</button>
-                                            <button type="button" class="btn btn-warning waves-effect waves-light mr-1"> Clear</button>
+                                            <button type="button" id="btn_Submit" class="btn btn-success waves-effect waves-light mr-1"> Assign</button>
+                                            <button type="button" id="btn_Clear" class="btn btn-warning waves-effect waves-light mr-1"> Clear</button>
                                         </div>
                                     </form>
                                 </div>
-                               <!-- end col-->
+                                <!-- end col-->
                             </div> <!-- end row -->
                         </div> <!-- end card-box -->
                     </div><!-- end col-->
@@ -139,73 +208,78 @@
 
                 <div class="row">
                     <div class="col-12">
-                       
-                            <div class="card-box">
-                                <h4 class="header-title">Assigned Vhicles List</h4>
-                                <table id="demo-custom-toolbar" data-toggle="table"
-                                       data-toolbar="#demo-delete-row"
-                                       data-search="true"
-                                       data-show-export="true"
-                                       data-show-refresh="true"
-                                       data-show-columns="true"
-                                       data-sort-name="id"
-                                       data-page-list="[5, 10, 20]"
-                                       data-page-size="5"
-                                       data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th data-field="Vehicle_Number" data-sortable="true">Vehicle Number</th>
-                                            <th data-field="Vehicle_Type" data-sortable="true">Vehicle Type</th>
-                                            <th data-field="Purchase_Year" data-sortable="true" data-formatter="dateFormatter">Purchase Year</th>
-                                            <th data-field="Vehicle_Engine" data-sortable="true" data-formatter="dateFormatter">Vehicle Engine</th>
-                                            <th data-field="Current_Mileage" data-sortable="true">Current Mileage</th>
 
-                                            <th data-field="Actions">Actions</th>
+                        <div class="card-box">
+                            <h4 class="header-title">Assigned Vhicles List</h4>
+                            <table id="demo-custom-toolbar" data-toggle="table"
+                                   data-toolbar="#demo-delete-row"
+                                   data-search="true"
+                                   data-show-export="true"
+                                   data-show-refresh="true"
+                                   data-show-columns="true"
+                                   data-sort-name="id"
+                                   data-page-list="[5, 10, 20]"
+                                   data-page-size="5"
+                                   data-pagination="true" data-show-pagination-switch="true" class="table-borderless">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th data-field="Vehicle_Number" data-sortable="true">Vehicle Number</th>
+                                        <th data-field="Vehicle_Type" data-sortable="true">Vehicle Type</th>
+                                        <th data-field="ASSIGNED_TO" data-sortable="true">Assigned To</th>
+                                        <th data-field="Assigned_Date" data-sortable="true">Assigned Date</th>
+                                        <th data-field="ASSIGNED_BY" data-sortable="true">Assigned By</th>
+
+
+                                        <th data-field="Actions">Actions</th>
+
+
+                                    </tr>
+                                </thead>
+                              
+                                    <tbody>
+                                        @if (Model.Count() == 0)
+                                        {
+                                            <tr>
+
+                                                <td colspan="5">No Record's found.</td>
+                                            </tr>
+
+
+                                        }
+
+                                        @foreach (var item in Model)
+
+
+                                        {
+                                        <tr>
+                                            <td>@item.Vehicle_Number</td>
+                                            <td>@item.Vehicle_Type</td>
+                                            <td>@item.ASSIGNED_TO</td>
+                                            <td>@item.Assigned_Date</td>
+                                            <td>@item.ASSIGNED_BY</td>
+
+                                            <td>
+
+
+                                                <button type="button" class="btn btn-blue waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Edit"><i class="mdi mdi-eye-outline"></i></button>
+                                                <button type="button" class="btn btn-danger waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Delete"><i class="mdi mdi-close"></i></button>
+
+                                            </td>
+
 
 
                                         </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tbody>
-                                            @if (Model.Count() == 0)
-                                            {
-                                                <tr>
-
-                                                    <td colspan="5">No Record's found.</td>
-                                                </tr>
-
-
-                                            }
-                                            <tr>
-                                                <td>@item.Vehicle_Number</td>
-                                                <td>@item.Purchase_Year</td>
-                                                <td>@item.Vehicle_Engine</td>
-                                                <td>@item.Current_Mileage</td>
-
-                                                <td></td>
-                                                <td>
-
-
-                                                    <button type="button" class="btn btn-blue waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Edit"><i class="mdi mdi-eye-outline"></i></button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Delete"><i class="mdi mdi-close"></i></button>
-
-                                                </td>
-
-
-
-                                            </tr>
-
-                                        </tbody>
-                                    }
-                                </table>
-                            </div> 
-                       
+                                        }
+                                    </tbody>
+                                
+                            </table>
                         </div>
+
                     </div>
+                </div>
 
 
-                </div> <!-- container -->
+            </div> <!-- container -->
 
         </div> <!-- content -->
         <!-- Footer Start -->
@@ -228,13 +302,12 @@
         <!-- end Footer -->
 
     </div>
-
+    
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
-
     <!-- Vendor js -->
     <script src="~/assets/js/vendor.min.js"></script>
     <!-- App js-->
@@ -248,6 +321,53 @@
 
 
     <!-- Tippy js-->
+
+    <script src="~/assets/libs/tippy-js/tippy.all.min.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        $("body").on("click", "#btn_Submit", function () {
+            console.log("event fired");
+
+            var Vehicle_Id = $("#ddl_Vehicle_Number option:selected").val();
+            var Employee_Id = $("#ddlEmployee_Name option:selected").val();
+            var User_Id =@TempData["User_Id"];
+
+
+            debugger;
+
+            var Status = "True";
+            var Reason = "";
+            if (Vehicle_Id.length > 0 && Employee_Id.length > 0) {
+
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Vehicle/Assign_Vehicle",
+                    data: '{Vehicle_Id:"' + Vehicle_Id + '",Assign_To:"' + Employee_Id + '",Assigned_By:"' + User_Id + '",Reason:"' + Reason + '",Status:"' + Status + '"}',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        alert("Vehicle Assigned Successfully");
+
+
+                    },
+                    failure: function (response) {
+                    },
+                    error: function (response) {
+
+
+                    }
+
+                })
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>

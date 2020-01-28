@@ -109,19 +109,22 @@
 
                                         </tr>
                                     </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tbody>
-                                            @if (Model.Count() == 0)
-                                            {
-                                                <tr>
+                                   
+                                    <tbody>
 
-                                                    <td colspan="5">No Record's found.</td>
-                                                </tr>
-
-
-                                            }
+                                        @if (Model.Count() == 0)
+                                        {
                                             <tr>
+
+                                                <td colspan="5">No Record's found.</td>
+                                            </tr>
+
+
+                                        }
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                
                                                 <td>@item.Vehicle_Number</td>
                                                 <td>@item.Purchase_Year</td>
                                                 <td>@item.Vehicle_Engine</td>
@@ -131,17 +134,17 @@
                                                 <td>
 
 
-                                                    <button type="button" class="btn btn-blue waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Edit"><i class="mdi mdi-eye-outline"></i></button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Delete"><i class="mdi mdi-close"></i></button>
+                                                    <button id="btn_Edit" type="button"  onclick="@Url.Action("View_Vehicles","Vehicle",@item.Vehicle_Id)" class="btn btn-blue waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Edit"><i class="mdi mdi-eye-outline"></i></button>
+                                                    <button id="btn_Delete" type="button" onclick="@Url.Action("Delete_Vehicle","Vehicle",@item.Vehicle_Id)" class="btn btn-danger waves-effect waves-light" data-plugin="tippy" data-tippy-placement="top" title="Delete"><i class="mdi mdi-close"></i></button>
 
                                                 </td>
 
 
 
                                             </tr>
-
-                                        </tbody>
-                                    }
+                                        }
+                                    </tbody>
+                                    
                                 </table>
                             </div> <!-- end card-box-->
                         </div> <!-- end col-->

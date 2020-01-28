@@ -42,44 +42,97 @@
     <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript">
-        //alert('test');
-        $(document).ready(function () {
-            //debugger;
-            $(window).load(function () {
+
+    <!--Slect Jquery-->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <script src="~/assets/libs/select2/jquery.min.js"></script>
+    <link href="~/assets/libs/select2/select22.min.css" rel="stylesheet" />
+    <script src="~/assets/libs/select2/select22.min.js"></script>
 
 
-                console.log("test");
-                alert('1');
-
-
-                $.ajax({
-
-                    type: "Post",
-                    url: "Vehicle/Get_Vhicle_Types",
-                    success: function (data) {
-
-                        for (var i = 0; i < data.length; i++) {
-
-                            var d_list = new Option(data[i].Vehicle_Type, data[i].Vehicle_Type_Id);
-
-                        }
-
-                        alert(d_list);
-                    }
-
-                });
-            });
-
-        });
-
-    </script>
     <script>
         $(document).ready(function () {
             console.log("document loaded");
         });
     </script>
 
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            var ddl_Vehicles_Type = $("#VehicleType");
+
+            ddl_Vehicles_Type.empty().append('<option selected="Select" Value="0" disabled="disabled">Loading...</option>');
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Vehicle/Get_Vehicle_Type",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    ddl_Vehicles_Type.empty().append('<option selected="Select" Value="0" disabled="disabled">Select</option>');
+
+                    $.each(response, function () {
+                        ddl_Vehicles_Type.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+
+                },
+                failure: function (response) {
+
+                    alert(response.responseText);
+
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            var ddl_Purchase_Year = $("#PurchaseYear");
+
+            ddl_Purchase_Year.empty().append('<option selected="Select" Value="0" disabled="disabled">Loading...</option>');
+
+            $.ajax({
+
+                type: "POST",
+                url: "/Vehicle/Get_Years",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    ddl_Purchase_Year.empty().append('<option selected="Select" Value="0" disabled="disabled">Select</option>');
+
+                    $.each(response, function () {
+                        ddl_Purchase_Year.append($("<option></option>").val(this['Value']).html(this['Text']));
+                    });
+
+                },
+                failure: function (response) {
+
+                    alert(response.responseText);
+
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+
+        });
+
+    </script>
 
 </head>
 
@@ -119,42 +172,32 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="email">Purchase Year * :</label>
-                                        <input type="text" class="form-control" name="PurchaseYear" id="PurchaseYear" required="" />
+                                        
+                                        <select id="PurchaseYear" name="PurchaseYear" class="form-control" required=""></select>
                                         @*<input type="email" id="email" class="form-control" name="email"
                                             data-parsley-trigger="change" required="">*@
                                     </div>
                                 </div>
 
                             </div>
-
                             <div class="row">
 
                                 <div class="col">
-
-                                    <div class="form-group">
-                                        <label>
-                                            Vehicle Type *:
-                                        </label>
-
-                                        <select id="VehicleType" name="VehicleType" class="form-control" required="">
-                                            <option value="Choose..">Choose..</option>
-                                            <option value="press">Press</option>
-                                            <option value="net">Internet</option>
-                                            <option value="mouth">Word of mouth</option>
-                                            <option value="other">Other..</option>
-                                        </select>
-
-
-                                    </div>
+                                    <label>Vehicle Type *:</label>
+                                    <select id="VehicleType" name="VehicleType" class="form-control"></select>
+                                    <script>$('.select2').select2();</script>
                                 </div>
+
                                 <div class="col">
 
-                                    <div class="form-group">
-                                        <label for="MakeofVehicle">Make of Vehicle * :</label>
-                                        <input type="text" class="form-control" name="MakeofVehicle" id="MakeofVehicle" required="">
-                                    </div>
+                                    <label>Make of Vehicle * :</label>
+                                    
+                                    <input type="text" class="form-control" name="MakeofVehicle" id="MakeofVehicle" required="">
                                 </div>
+
+
                             </div>
+                            
                             <div class="row">
                                 <div class="col">
 
@@ -394,7 +437,7 @@
         $("body").on("click", "#btn_Submit", function () {
 
             var VehicleNumber = $("#VehicleNumber").val();
-            var PurchaseYear = $("#PurchaseYear").val();
+            var PurchaseYear = $("#PurchaseYear option:selected").val();
             var VehicleType = $("#VehicleType option:selected").val();
             var MakeofVehicle = $("#MakeofVehicle").val();
             var Color = $("#Color").val();

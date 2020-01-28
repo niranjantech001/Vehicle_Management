@@ -19,12 +19,13 @@ namespace Vehicle_Management.Dal
         }
 
 
-        public DbSet<VehicleDetails> vehicles { get; set; }
+        public DbSet<VehicleDetails> Vehicles { get; set; }
 
         public DbSet<Vehicle_Types> vehicle_Types { get; set; }
-        public ICollection<Vehicle_Types> vehicle_Types_List { get; set; }
+  
+        public DbSet<Employees> Employees { get; set; }
 
-
+        public DbSet<Vehicle_Assign> Vehicle_Assign { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

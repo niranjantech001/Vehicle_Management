@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,600,700,900);
+/*@import url(https://fonts.googleapis.com/css?family=Nunito:400,600,700,900);*/
 
 @font-face {
     font-family: "Nunito,sans-serif";
@@ -4423,7 +4423,7 @@ div.hopscotch-bubble {
 }
 
 .bootstrap-table .table {
-    border-bottom: none
+    /*border-bottom: none*/
 }
 
     .bootstrap-table .table > thead > tr > th {
